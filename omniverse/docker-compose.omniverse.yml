@@ -10,3 +10,15 @@ services:
       file: ../docker-compose.yml
       service: redis
     container_name: omniverse-redis
+
+  omniverse-orchestrator:
+    image: docker:27-cli
+    container_name: omniverse-orchestrator
+    working_dir: /workspace
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ..:/workspace
+    environment:
+      COMPOSE_PROJECT_NAME: omniverse
+    command: ["sh", "-c", "docker compose -f docker-compose.yml up -d --build && docker compose -f docker-compose.yml ps"]
+    profiles: ["orchestrator"]
