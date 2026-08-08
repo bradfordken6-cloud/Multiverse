@@ -1,0 +1,12 @@
+name: omniverse
+
+services:
+  multiverse-api:
+    extends:
+      file: ../docker-compose.yml
+      service: multiverse-api
+
+  redis:
+    extends:
+      file: ../docker-compose.yml
+      service: redis
