@@ -1,0 +1,27 @@
+services:
+  multiverse-api:
+    extends:
+      file: ../docker-compose.yml
+      service: multiverse-api
+  redis:
+    extends:
+      file: ../docker-compose.yml
+      service: redis
+  omniverse-orchestrator:
+    build: ./orchestrator
+    container_name: omniverse-orchestrator
+    restart: unless-stopped
+    environment:
+      MULTIVERSE_API_URL: http://multiverse-api:8080
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "8090:8090"
+    depends_on:
+      - multiverse-api
+      - redis
+    networks:
+      - multiverse
+
+networks:
+  multiverse:
+    driver: bridge
