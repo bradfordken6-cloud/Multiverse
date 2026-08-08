@@ -1,0 +1,47 @@
+{
+  "folders": [
+    { "path": "..", "name": "Multiverse" },
+    { "path": "../services/api", "name": "Multiverse API" },
+    { "path": "../config", "name": "Shared Config" }
+  ],
+  "settings": {
+    "docker.languageserver.diagnostics.deprecatedMaintainer": "ignore",
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/.pytest_cache": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-azuretools.vscode-docker",
+      "ms-vscode-remote.remote-containers",
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "redhat.vscode-yaml"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Multiverse: Start Docker",
+        "type": "shell",
+        "command": "docker compose up --build -d",
+        "problemMatcher": []
+      },
+      {
+        "label": "Multiverse: Stop Docker",
+        "type": "shell",
+        "command": "docker compose down",
+        "problemMatcher": []
+      },
+      {
+        "label": "Multiverse: Health Check",
+        "type": "shell",
+        "command": "curl -fsS http://localhost:8080/health",
+        "problemMatcher": []
+      }
+    ]
+  }
+}
