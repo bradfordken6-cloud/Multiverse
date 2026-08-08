@@ -7,6 +7,9 @@ services:
     environment:
       MULTIVERSE_API_KEY: ${MULTIVERSE_API_KEY:-change-me}
       REDIS_URL: redis://redis:6379/0
+      MULTIVERSE_CONFIG: /config/multiverse.config.json
+    volumes:
+      - ./config/multiverse.config.json:/config/multiverse.config.json:ro
     ports:
       - "8080:8080"
     depends_on:
