@@ -9,10 +9,11 @@ if [ ! -f .env ]; then
 fi
 
 echo "Starting Omniverse stack..."
-docker compose -f omniverse/compose.yml up --build -d
+docker compose -f omniverse/docker-compose.yml up --build -d
 
 echo
 echo "Omniverse stack is starting."
-echo "API: http://localhost:8080/health"
+echo "API:          http://localhost:8080/health"
+echo "Orchestrator: http://localhost:8090/health"
 echo
-docker compose -f omniverse/compose.yml ps
+docker compose -f omniverse/docker-compose.yml ps
