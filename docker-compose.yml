@@ -1,0 +1,38 @@
+services:
+  multiverse-api:
+    build:
+      context: ./services/api
+    container_name: multiverse-api
+    restart: unless-stopped
+    environment:
+      MULTIVERSE_API_KEY: ${MULTIVERSE_API_KEY:-change-me}
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "8080:8080"
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - multiverse
+
+  redis:
+    image: redis:7-alpine
+    container_name: multiverse-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - multiverse
+
+networks:
+  multiverse:
+    driver: bridge
+
+volumes:
+  redis-data:
