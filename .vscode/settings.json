@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "files.trimTrailingWhitespace": true,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.venv": true,
+    "**/.pytest_cache": true
+  },
+  "python.analysis.typeCheckingMode": "basic",
+  "python.defaultInterpreterPath": "/usr/local/bin/python"
+}
