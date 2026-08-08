@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0",
+  "cluster": "multiverse",
+  "hub": {
+    "apiUrl": "http://multiverse-api:8080",
+    "publicApiUrl": "http://localhost:8080"
+  },
+  "node": {
+    "heartbeatSeconds": 30,
+    "registrationTtlSeconds": 90
+  },
+  "services": {
+    "api": { "port": 8080 },
+    "redis": { "host": "redis", "port": 6379 }
+  }
+}
