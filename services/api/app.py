@@ -4,6 +4,8 @@ import uuid
 from datetime import datetime, timezone
 
 from fastapi import FastAPI, Header, HTTPException
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from redis import Redis
 
@@ -12,6 +14,9 @@ redis = Redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379/0"), decod
 API_KEY = os.getenv("MULTIVERSE_API_KEY", "change-me")
 NODE_TTL_SECONDS = int(os.getenv("NODE_TTL_SECONDS", "90"))
 NODE_PREFIX = "multiverse:node:"
+STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
+
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 class NodeRegistration(BaseModel):
@@ -28,6 +33,11 @@ def require_key(x_api_key: str | None):
 
 def now():
     return datetime.now(timezone.utc).isoformat()
+
+
+@app.get("/")
+def launcher():
+    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
 
 
 @app.get("/health")
