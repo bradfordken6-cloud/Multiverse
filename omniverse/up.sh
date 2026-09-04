@@ -15,5 +15,6 @@ echo
 echo "Omniverse stack is starting."
 echo "API:          http://localhost:8080/health"
 echo "Orchestrator: http://localhost:8090/health"
+echo "MultiverseOS: http://localhost:8070/index"
 echo
 docker compose -f omniverse/docker-compose.yml ps
