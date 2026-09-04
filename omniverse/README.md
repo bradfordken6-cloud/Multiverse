@@ -23,3 +23,10 @@ bash omniverse/down.sh
 ```
 
 The orchestration layer currently starts the Multiverse API and Redis registry. Additional services can be added to `omniverse/compose.yml` as the system grows.
+
+## MultiverseOS
+
+The focused MultiverseOS interface is available at `http://localhost:8070/index`.
+It progresses through `/index`, `/index2`, and `/index3`. Put visual assets only in
+`multiverseos/crystallic/images`; the image atlas reads that designated folder and
+does not index the rest of the repository.

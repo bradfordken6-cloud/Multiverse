@@ -22,6 +22,15 @@ services:
     networks:
       - multiverse
 
+  multiverseos:
+    build: ../multiverseos
+    container_name: multiverseos
+    restart: unless-stopped
+    ports:
+      - "8070:8070"
+    networks:
+      - multiverse
+
 networks:
   multiverse:
     driver: bridge
